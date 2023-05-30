@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TLOZ</title>
+    <!-- Fuente Personalizada https://fonts.google.com/-->  
+    <link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,600,700&display=swap" rel="stylesheet"> 
+    <!-- Bootstrap Css -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!-- Efecto ScrollReveal https://scrollrevealjs.org/ -->
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <!-- Mi Css -->
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="index.html"><span class="font-weight-bold">TLOZ SHOP</span></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="register.html">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.html">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="products.html">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>                      
+                </ul>
+            </div>
+      </div>
+    </nav>
+
+    <section id="shopping-cart">
+        <!-- Visual Shopping Cart -->
+        <div class="container my-5">
+            <div>
+                <h2 class="text-center" id="title-products-page">All Games</h2>
+            </div>
+            <div class="row mt-5">
+                <!-- Elementos generados a partir del JSON -->
+                <main id="items" class="col-sm-8 row"></main>
+                <!-- Carrito -->
+                <aside class="col-sm-4">
+                    <h2>Shopping Cart</h2>
+                    <!-- Elementos del carrito -->
+                    <ul id="carrito" class="list-group"></ul>
+                    <hr>
+                    <!-- Precio total -->
+                    <p class="text-right">Total: $<span id="total"></span></p>
+                </aside>
+            </div>
+        </div>
+    </section>
+
+    <!-- footer -->
+    <section id="footer">
+        <div class="container">
+            <div class="row my-5">
+                
+                <div class="col-md-12">
+                    <h4>TLOZ</h4>
+                    <p>Privacy Policy. <br> ©2020 Juan Ortiz. <br> Grizzly regards from Colombia.
+                    </p>
+                </div>                
+                
+            </div>
+        </div>
+    </section> 
+
+
+    <!-- Bootstrap JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <!-- Scripts Scroll y scroll suave https://stackoverflow.com/questions/7717527/smooth-scrolling-when-clicking-an-anchor-link -->
+    
+    <script>
+        window.sr = ScrollReveal();
+        sr.reveal('.navbar', {
+            duration: 2000,
+            origin: 'bottom'
+        });
+        sr.reveal('.info-right', {
+           duration: 2000,
+           origin: 'bottom',
+           distance: '300px'
+       });        
+       sr.reveal('#shopping-cart', {
+           duration: 2000,
+           origin: 'left',
+           distance: '300px',
+           delay:500
+       });
+        window.sr = ScrollReveal();
+       sr.reveal('#footer', {
+           duration: 2000,
+           origin: 'bottom'
+       });
+       window.sr = ScrollReveal();
+        sr.reveal('#title-products-page',{
+            duration: 2500,
+            origin: 'bottom'
+        });        
+                 
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+    //Shoping Card    
+        
+        window.onload = function () {
+            // Variables
+            let baseDeDatos = [
+                {
+                    id: 1,
+                    nombre: "The Legend of Zelda: Link's Awekening",
+                    precio: 59.99,
+                    imagen: src="img/product1.jpg"
+                },
+                {
+                    id: 2,
+                    nombre: "The Legend of Zelda: Breath Of The Wild",
+                    precio: 59.99,
+                    imagen: src="img/product2.jpg"
+                },
+                {
+                    id: 3,
+                    nombre: "The Legend of Zelda: Majora's Mask",
+                    precio: 9.99,
+                    imagen: src="img/product3.jpg"
+                },
+                {
+                    id: 4,
+                    nombre: "The Legend of Zelda: Twilight Princess HD",
+                    precio: 59.99,
+                    imagen: src="img/product4.jpg"
+                },
+                {
+                    id: 5,
+                    nombre: "The Legend of Zelda: Spirit Tracks",
+                    precio: 9.99,
+                    imagen: src="img/product5.jpg"
+                },
+                {
+                    id: 6,
+                    nombre: "The Legend of Zelda: Skyward Sword",
+                    precio: 19.99,
+                    imagen: src="img/product6.jpg"
+                },
+                {
+                    id: 7,
+                    nombre: "The Legend of Zelda: The Wind Waker HD",
+                    precio: 19.99,
+                    imagen: src="img/product7.jpg"
+                },
+                {
+                    id: 8,
+                    nombre: "The Legend of Zelda: Ocarina of Time",
+                    precio: 19.99,
+                    imagen: src="img/product8.jpg"
+                },
+                {
+                    id: 9,
+                    nombre: "The Legend of Zelda: The Minish Cap",
+                    precio: 7.99,
+                    imagen: src="img/product9.jpg"
+                }
+
+            ]
+            let $items = document.querySelector('#items');
+            let carrito = [];
+            let total = 0;
+            let $carrito = document.querySelector('#carrito');
+            let $total = document.querySelector('#total');
+            // Funciones
+            function renderItems () {
+                for (let info of baseDeDatos) {
+                    // Estructura
+                    let miNodo = document.createElement('div');
+                    miNodo.classList.add('card', 'col-sm-4');
+                    // Body
+                    let miNodoCardBody = document.createElement('div');
+                    miNodoCardBody.classList.add('card-body');
+                    // Titulo
+                    let miNodoTitle = document.createElement('h5');
+                    miNodoTitle.classList.add('card-title');
+                    miNodoTitle.textContent = info['nombre'];
+                    // Imagen
+                    let miNodoImagen = document.createElement('img');
+                    miNodoImagen.classList.add('img-fluid');
+                    miNodoImagen.setAttribute('src', info['imagen']);
+                    // Precio
+                    let miNodoPrecio = document.createElement('p');
+                    miNodoPrecio.classList.add('card-text');
+                    miNodoPrecio.textContent ='$' + info['precio'];
+                    // Boton 
+                    let miNodoBoton = document.createElement('button');
+                    miNodoBoton.classList.add('btn', 'btn-success');
+                    miNodoBoton.textContent = '+';
+                    miNodoBoton.setAttribute('marcador', info['id']);
+                    miNodoBoton.addEventListener('click', anyadirCarrito);
+                    // Insertamos
+                    miNodoCardBody.appendChild(miNodoImagen);
+                    miNodoCardBody.appendChild(miNodoTitle);
+                    miNodoCardBody.appendChild(miNodoPrecio);
+                    miNodoCardBody.appendChild(miNodoBoton);
+                    miNodo.appendChild(miNodoCardBody);
+                    $items.appendChild(miNodo);
+                }
+            }
+
+            function anyadirCarrito () {
+                // Anyadimos el Nodo a nuestro carrito
+                carrito.push(this.getAttribute('marcador'))
+                // Calculo el total
+                calcularTotal();
+                // Renderizamos el carrito 
+                renderizarCarrito();
+            }
+
+            function renderizarCarrito () {
+                // Vaciamos todo el html
+                $carrito.textContent = '';
+                // Quitamos los duplicados
+                let carritoSinDuplicados = [...new Set(carrito)];
+                // Generamos los Nodos a partir de carrito
+                carritoSinDuplicados.forEach(function (item, indice) {
+                    // Obtenemos el item que necesitamos de la variable base de datos
+                    let miItem = baseDeDatos.filter(function(itemBaseDatos) {
+                        return itemBaseDatos['id'] == item;
+                    });
+                    // Cuenta el número de veces que se repite el producto
+                    let numeroUnidadesItem = carrito.reduce(function (total, itemId) {
+                        return itemId === item ? total += 1 : total;
+                    }, 0);
+                    // Creamos el nodo del item del carrito
+                    let miNodo = document.createElement('li');
+                    miNodo.classList.add('list-group-item', 'text-right', 'mx-2');
+                    miNodo.textContent = `${numeroUnidadesItem} x ${miItem[0]['nombre']} - ${miItem[0]['precio']}$`;
+                    // Boton de borrar
+                    let miBoton = document.createElement('button');
+                    miBoton.classList.add('btn', 'btn-danger', 'mx-5');
+                    miBoton.textContent = 'X';
+                    miBoton.style.marginLeft = '1rem';
+                    miBoton.setAttribute('item', item);
+                    miBoton.addEventListener('click', borrarItemCarrito);
+                    // Mezclamos nodos
+                    miNodo.appendChild(miBoton);
+                    $carrito.appendChild(miNodo);
+                })
+            }
+
+            function borrarItemCarrito () {
+                console.log()
+                // Obtenemos el producto ID que hay en el boton pulsado
+                let id = this.getAttribute('item');
+                // Borramos todos los productos
+                carrito = carrito.filter(function (carritoId) {
+                    return carritoId !== id;
+                });
+                // volvemos a renderizar
+                renderizarCarrito();
+                // Calculamos de nuevo el precio
+                calcularTotal();
+            }
+
+            function calcularTotal () {
+                // Limpiamos precio anterior
+                total = 0;
+                // Recorremos el array del carrito
+                for (let item of carrito) {
+                    // De cada elemento obtenemos su precio
+                    let miItem = baseDeDatos.filter(function(itemBaseDatos) {
+                        return itemBaseDatos['id'] == item;
+                    });
+                    total = total + miItem[0]['precio'];
+                }
+                // Formateamos el total para que solo tenga dos decimales
+                let totalDosDecimales = total.toFixed(2);
+                // Renderizamos el precio en el HTML
+                $total.textContent = totalDosDecimales;
+            }
+            // Eventos
+
+            // Inicio
+            renderItems();
+        }
+
+      
+    </script>
+</body>
+</html>
